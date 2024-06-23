@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\iljas\source\repos\AutoUploader\AutoUploader\obj\Debug\net8.0-windows\
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\obj\Release\net8.0-windows\
 AutoUploader
 none
 false
-TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+TRACE;RELEASE;NET;NET8_0;NETCOREAPP
 C:\Users\iljas\source\repos\AutoUploader\AutoUploader\App.xaml
 11407045341
 3-1101581785
-14-1576728780
+14-708640052
 20251475619
 MainWindow.xaml;
 
-True
+False
 

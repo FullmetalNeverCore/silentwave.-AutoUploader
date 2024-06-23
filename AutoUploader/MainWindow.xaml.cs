@@ -51,8 +51,6 @@ AutoUploader
             this.ResizeMode = ResizeMode.NoResize;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             UploadBtn.Click += NewButton_Click;
-            RadioButton1.Checked += RadioButton_Checked;
-            RadioButton2.Checked += RadioButton_Checked;
 
             RadioButton3.Checked += Headless_Checked;
             RadioButton4.Checked += Headless_Checked;

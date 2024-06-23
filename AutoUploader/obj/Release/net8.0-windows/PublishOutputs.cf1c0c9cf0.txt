@@ -1,0 +1,12 @@
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\AutoUploader.exe
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\selenium-manager\linux\selenium-manager
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\selenium-manager\macos\selenium-manager
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\selenium-manager\windows\selenium-manager.exe
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\AutoUploader.dll
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\AutoUploader.deps.json
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\AutoUploader.runtimeconfig.json
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\AutoUploader.pdb
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\SeleniumExtras.WaitHelpers.dll
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\Newtonsoft.Json.dll
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\WebDriver.Support.dll
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Release\net8.0-windows\publish\WebDriver.dll
