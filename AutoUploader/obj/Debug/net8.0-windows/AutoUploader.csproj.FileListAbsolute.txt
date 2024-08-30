@@ -28,3 +28,5 @@ C:\Users\iljas\source\repos\AutoUploader\AutoUploader\obj\Debug\net8.0-windows\A
 C:\Users\iljas\source\repos\AutoUploader\AutoUploader\obj\Debug\net8.0-windows\ref\AutoUploader.dll
 C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Debug\net8.0-windows\SeleniumExtras.WaitHelpers.dll
 C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Debug\net8.0-windows\WebDriver.Support.dll
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\obj\Debug\net8.0-windows\AutoUploader.sourcelink.json
+C:\Users\iljas\source\repos\AutoUploader\AutoUploader\bin\Debug\net8.0-windows\TagLibSharp.dll

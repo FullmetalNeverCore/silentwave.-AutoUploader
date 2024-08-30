@@ -75,7 +75,7 @@ namespace AutoUploader.Selenium
             catch (NoSuchElementException ex)
             {
                 _istruct.error++;
-                UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error);
+                ll.Dispatcher.Invoke(() => UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error));
                 tb.Dispatcher.Invoke(() =>
                 {
                     tb.AppendText($"[ERROR] Element not found: {ex.Message}\n");
@@ -84,7 +84,7 @@ namespace AutoUploader.Selenium
             catch (Exception ex)
             {
                 _istruct.error++;
-                UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error);
+                ll.Dispatcher.Invoke(() => UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error));
                 tb.Dispatcher.Invoke(() =>
                 {
                     tb.AppendText($"[ERROR] An error occurred: {ex.Message}\n");

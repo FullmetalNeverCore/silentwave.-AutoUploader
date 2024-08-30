@@ -10,10 +10,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace AutoUploader.Selenium
 {
-    class FirefoxStart : iInitBehaviour
+    public class FirefoxStart : iInitBehaviour
     {
 
         private static string _ff; //@"C:\Program Files\Mozilla Firefox\firefox.exe";
@@ -57,8 +58,37 @@ namespace AutoUploader.Selenium
                     throw new FileNotFoundException($"The file 'geckodriver.exe' was not found in directory '{driverDirectory}'.");
                 }
 
+
+                //stuff for downloading files from net
+
+                var prof = new FirefoxProfile();
+
+                string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DownloadedFiles");
+                tb.Dispatcher.Invoke(() =>
+                {
+                    tb.AppendText($"[INFO] download path {downloadPath}\n");
+                });
+                if (!Path.Exists(downloadPath))
+                {
+                    tb.Dispatcher.Invoke(() =>
+                    {
+                        tb.AppendText($"[INFO] Creating download directory...{downloadPath}\n");
+                    });
+                    Directory.CreateDirectory(downloadPath);
+                }
+
+                prof.SetPreference("browser.download.folderList", 2);
+                prof.SetPreference("browser.download.dir", downloadPath);
+                prof.SetPreference("browser.helperApps.neverAsk.saveToDisk", "audio/mpeg,audio/mp3");  // MIME types
+
+                //prof.SetPreference("browser.download.manager.showWhenStarting", false);
+                prof.SetPreference("pdfjs.disabled", true);
+
                 // Create FirefoxOptions object if you need to set any Firefox-specific options
-                FirefoxOptions opts = new FirefoxOptions();
+                FirefoxOptions opts = new FirefoxOptions
+                {
+                    Profile = prof
+                };
                 if (hd)
                 {
                     tb.Dispatcher.Invoke(() =>

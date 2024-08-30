@@ -31,10 +31,10 @@ namespace AutoUploader.Selenium
             catch(Exception ex)
             {
                 _istruct.error++;
-                UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error);
+                ll.Dispatcher.Invoke(() => UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error));
                 tb.Dispatcher.Invoke(() =>
                 {
-                    tb.AppendText($"[ERR] {ex.ToString}\n");
+                    tb.AppendText($"[ERR] {ex.Message}\n");
                 });
             }
         }
@@ -54,10 +54,10 @@ namespace AutoUploader.Selenium
             catch(NoSuchElementException nse)
             {
                 _istruct.error++;
-                UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error);
+                ll.Dispatcher.Invoke(() => UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error));
                 tb.Dispatcher.Invoke(() =>
                 {
-                    tb.AppendText($"[ERR] {nse.ToString}\n");
+                    tb.AppendText($"[ERR] {nse.Message}\n");
                 });
             }
         }
@@ -69,7 +69,7 @@ namespace AutoUploader.Selenium
             ///
             try
             {
-                IWebElement track = wb.FindElement(By.Id("tracks_row_1"));
+                IWebElement track = wb.FindElement(By.XPath("//*[@id=\"tracks_row_1\"]"));
                 IWebElement target = wb.FindElement(By.Id("playlists_row_4"));
 
                 //drag and drop
@@ -78,7 +78,7 @@ namespace AutoUploader.Selenium
                 act.DragAndDrop(track, target).Perform();
 
                 _istruct.success++;
-                UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error);
+                ll.Dispatcher.Invoke(()=>UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error));
                 tb.Dispatcher.Invoke(() =>
                 {
                     tb.AppendText($"[OK] File was sent to playlist!\n");
@@ -87,10 +87,10 @@ namespace AutoUploader.Selenium
             catch(Exception ex)
             {
                 _istruct.error++;
-                UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error);
+                ll.Dispatcher.Invoke(() => UIUpdates.UpdateContent(ll, _istruct.total, _istruct.success, _istruct.error));
                 tb.Dispatcher.Invoke(() =>
                 {
-                    tb.AppendText($"[ERR] {ex.ToString}\n");
+                    tb.AppendText($"[ERR] {ex.Message}\n");
                 });
             }
 
