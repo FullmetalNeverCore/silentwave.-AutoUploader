@@ -146,7 +146,6 @@ AutoUploader
 
                 _selectedFiles = _autoBehaviour ? await AutoBehaviour() : _fileHandler.SelectFiles();
 
-
                 if (_selectedFiles != null && _selectedFiles.Length > 0)
                 {
                     _firstLettersArray = _fileHandler.ExtractFirstLetters(_selectedFiles);
@@ -278,49 +277,65 @@ AutoUploader
             if (!linkToSong.Equals("Error generating link"))
             {
                 SongResponse suggestStruct = await Task.Run(() => GetSuggestions.ByPayloadAsync(linkToSong, TerminalTextBox));
-                Random rand = new Random();
-                int randIndex = rand.Next(suggestStruct.Documents.Count);
-
-                Document suggestedSong = suggestStruct.Documents[randIndex];
-                TerminalTextBox.AppendText($"[INFO] Auto Behaviour - Suggested Song Name : {suggestedSong.SongName}\n");
-                TerminalTextBox.AppendText($"[INFO] Auto Behaviour - Suggested Song Youtube link : {suggestedSong.YoutubeLink}\n");
-
-                Downloader.NavigateToDownloader(driver, TerminalTextBox);
-                System.Threading.Thread.Sleep(1000);
-                Downloader.InputLink(driver, TerminalTextBox, suggestedSong.YoutubeLink);
-                System.Threading.Thread.Sleep(1000);
-                PressHandler.Interaction(driver, TerminalTextBox, "/html/body/form/div[2]/input[2]", "Converting...");
-
-                System.Threading.Thread.Sleep(10000);
-                PressHandler.Interaction(driver, TerminalTextBox, "/html/body/form/div[2]/a[1]", "Downloading...");
-
-                System.Threading.Thread.Sleep(20000);
-
-                _driverInitializer.Dispose(driver, TerminalTextBox);
-
-                string searchText = suggestedSong.SongName;
-
-                var files = Directory.EnumerateFiles(downloadPath, "*", SearchOption.AllDirectories)
-                                     .Where(file => System.IO.Path.GetFileName(file).Contains(searchText))
-                                     .ToArray();
-
-                if (files.Any())
+                if(suggestStruct != null)
                 {
-                    foreach (var file in files)
+                    Random rand = new Random();
+                    int randIndex = rand.Next(suggestStruct.Documents.Count);
+
+                    Document suggestedSong = suggestStruct.Documents[randIndex];
+                    TerminalTextBox.AppendText($"[INFO] Auto Behaviour - Suggested Song Name : {suggestedSong.SongName}\n");
+                    TerminalTextBox.AppendText($"[INFO] Auto Behaviour - Suggested Song Youtube link : {suggestedSong.YoutubeLink}\n");
+
+                    string searchText = suggestedSong.SongName;
+                    var files = Directory.EnumerateFiles(downloadPath, "*", SearchOption.AllDirectories)
+                                         .Where(file => System.IO.Path.GetFileName(file).Contains(searchText))
+                                         .ToArray();
+
+                    if (!files.Any())
                     {
-                        MetaDataManipulator.FixMetaData(file, suggestedSong.SongName, suggestedSong.Artist);
+                        TerminalTextBox.AppendText($"[INFO] Auto Behaviour - No duplicates were found!\n");
+                        Downloader.NavigateToDownloader(driver, TerminalTextBox);
+                        System.Threading.Thread.Sleep(1000);
+                        Downloader.InputLink(driver, TerminalTextBox, suggestedSong.YoutubeLink);
+                        System.Threading.Thread.Sleep(1000);
+                        PressHandler.Interaction(driver, TerminalTextBox, "/html/body/form/div[2]/input[2]", "Converting...");
+
+                        System.Threading.Thread.Sleep(10000);
+                        PressHandler.Interaction(driver, TerminalTextBox, "/html/body/form/div[2]/a[1]", "Downloading...");
+
+                        TerminalTextBox.AppendText($"[INFO] Auto Behaviour - Sleep for 40 secs, while download is in progress\n");
+                        System.Threading.Thread.Sleep(40000);
+
+                        _driverInitializer.Dispose(driver, TerminalTextBox);
+
+                        var latestFile = Directory.EnumerateFiles(downloadPath, "*", SearchOption.AllDirectories)
+                                              .Select(f => new FileInfo(f))
+                                              .OrderByDescending(f => f.LastWriteTime)
+                                              .FirstOrDefault();
+
+                        if (latestFile != null)
+                        {
+                            return new string[] { MetaDataManipulator.FixMetaData(latestFile.FullName, suggestedSong.SongName, suggestedSong.Artist) };
+
+                        }
+                        else
+                        {
+                            TerminalTextBox.AppendText("[INFO] No new files found.\n");
+                            return null;
+                        }
                     }
-                    return files; 
                 }
                 else
                 {
-                    TerminalTextBox.AppendText("[INFO] No files found with the specified text in their names.\n");
-                    return null; 
+                    TerminalTextBox.AppendText("[INFO] Duplicate is found, restarting operation...\n");
+                    _driverInitializer.Dispose(driver, TerminalTextBox);
+                    return await AutoBehaviour();
                 }
             }
 
-            return null; 
+            return null;
         }
+
 
         private async void SuggestBtn_Click(object sender, RoutedEventArgs e)
         {

@@ -11,7 +11,9 @@ namespace AutoUploader.Selenium.Suggestions
     {
         public static Dictionary<string, string> songs = new Dictionary<string, string>
         {
-            { "Heaven's Night","\"/music/Akira Yamaoka/_/Heaven's Night\""}
+            { "Heaven's Night","\"/music/Akira Yamaoka/_/Heaven's Night\"" },
+            { "The Day of Night","/music/Akira Yamaoka/_/The Day of Night" },
+            { "Stray Child","/music/Akira Yamaoka/_/A Stray Child" }
         };
 
         private static string GetRandomKey()

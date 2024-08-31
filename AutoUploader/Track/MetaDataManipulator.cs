@@ -9,7 +9,7 @@ namespace AutoUploader.Track
 {
     class MetaDataManipulator
     {
-        public static void FixMetaData(string filePath, string newSongName, string artistName)
+        public static string FixMetaData(string filePath, string newSongName, string artistName)
         {
             try
             {
@@ -23,10 +23,12 @@ namespace AutoUploader.Track
                 File.Move(filePath, newFileName);
 
                 Console.WriteLine($"[INFO] File renamed to: {newFileName}");
+                return newFileName; 
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[ERROR] Failed to update metadata or rename file: {ex.Message}");
+                return null;
             }
         }
     }

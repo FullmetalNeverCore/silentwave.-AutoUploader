@@ -9,25 +9,34 @@
     <Grid x:Name="MainGrid">
         <!--Terminal Window-->
         <TextBox x:Name="TerminalTextBox" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
-                 Background="Black" Foreground="White" FontFamily="Consolas" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center"
-                 Width="600" Height="200" Margin="0,5,0,0"/>
-        <Label x:Name="Files" Content="Total: 0 Success: 0 Fails: 0" Margin="100,199,-100,-199"></Label>
-        <Grid Margin="-10,67,10,-67">
-            <Button x:Name="UploadBtn" Content="Upload" Margin="420,237,310,148"/>
-            <Button x:Name="SuggestBtn" Content="Suggest" Margin="268,237,462,148" Click="SuggestBtn_Click"/>
+                 Background="Black" Foreground="White" FontFamily="Consolas" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left"
+                 Width="587" Height="434"/>
+        <Label x:Name="Files" Content="Total: 0 Success: 0 Fails: 0" Margin="587,358,0,-358" HorizontalAlignment="Left" Width="800"/>
+        <Grid Margin="-175,-108,0,108" HorizontalAlignment="Left" Width="779">
+            <Button x:Name="UploadBtn" Content="Upload" Margin="897,193,-167,192"/>
+            <Button x:Name="SuggestBtn" Content="Suggest" Margin="897,114,-167,271" Click="SuggestBtn_Click"/>
         </Grid>
         <!-- LeftGrid -->
-        <Grid x:Name="LeftGrid" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Margin="157,265,0,0">
+        <Grid x:Name="LeftGrid" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Margin="184,416,0,0">
             <!-- Add content for the left grid here -->
-            <StackPanel Margin="383,-69,-363,-39">
+            <StackPanel Margin="410,-412,-383,175">
                 <Label Content="Headless?:" Margin="5"/>
                 <RadioButton x:Name="RadioButton3" Content="Yes" GroupName="DriverOptions" Margin="5"/>
                 <RadioButton x:Name="RadioButton4" Content="No" GroupName="DriverOptions" Margin="5"/>
-                <Label x:Name="HeadlessLabel"  Margin="5" Height="29"/>
-                
+                <Label x:Name="HeadlessLabel"  Margin="5" Height="24" RenderTransformOrigin="0.5,0.5" Width="139">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+
                 <!-- Enable Suggestions Switch -->
-                <Label Content="Enable Suggestions:" Margin="5,20,5,0"/>
-                <CheckBox x:Name="EnableSuggestionsCheckBox" Margin="5">
+                <Label Content="Enable Suggestions:" Margin="5" Width="117"/>
+                <CheckBox x:Name="EnableSuggestionsCheckBox" Margin="5" Width="109">
                     <CheckBox.Style>
                         <Style TargetType="CheckBox">
                             <Setter Property="Template">
@@ -35,7 +44,7 @@
                                     <ControlTemplate TargetType="CheckBox">
                                         <Grid Width="50" Height="25">
                                             <Border Name="SwitchBorder" CornerRadius="12.5" Background="LightGray" />
-                                            <Ellipse Name="SwitchThumb" Width="20" Height="20" Fill="White" Margin="2.5,2.5,27.5,2.5"/>
+                                            <Ellipse Name="SwitchThumb" Width="20" Height="20" Fill="White" Margin="5"/>
                                             <ContentPresenter />
                                         </Grid>
                                         <ControlTemplate.Triggers>
